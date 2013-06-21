@@ -37,4 +37,15 @@ public class Tranform {
     return list;
   }
 
+  public List<String> de(List<Integer> ints, IntegerToString integerToString) {
+    List<String> list = newArrayList();
+
+    for (Integer numero : ints) {
+      String res = integerToString.apply(numero);
+      list.add(res);
+    }
+
+    return list;
+  }
+
 }

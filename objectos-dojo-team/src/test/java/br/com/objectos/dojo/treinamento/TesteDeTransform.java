@@ -16,6 +16,7 @@
 package br.com.objectos.dojo.treinamento;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Lists.transform;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -40,6 +41,29 @@ public class TesteDeTransform {
 
     Tranform tranform = new Tranform();
     List<String> res = tranform.de(ints);
+
+    assertThat(res.size(), equalTo(10));
+    assertThat(res, equalTo(prova));
+  }
+
+  public void deve_transformar_lista_integer_to_lista_string_transform() {
+    List<Integer> ints = newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+    List<String> prova = ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+
+    Tranform tranform = new Tranform();
+    List<String> res = tranform.de(ints, new IntegerToString());
+
+    assertThat(res.size(), equalTo(10));
+    assertThat(res, equalTo(prova));
+  }
+
+  public void deve_transformar_lista_integer_to_lista_string_transform_2() {
+    List<Integer> ints = newArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+    List<String> prova = ImmutableList.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+
+    List<String> res = transform(ints, new IntegerToString());
 
     assertThat(res.size(), equalTo(10));
     assertThat(res, equalTo(prova));

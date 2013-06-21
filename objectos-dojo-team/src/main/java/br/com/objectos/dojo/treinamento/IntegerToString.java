@@ -24,10 +24,13 @@ import com.google.common.base.Function;
  */
 class IntegerToString implements Function<Integer, String> {
 
-  private final Integer numero;
+  private Integer numero;
 
   public IntegerToString(Integer numero) {
     this.numero = numero;
+  }
+
+  public IntegerToString() {
   }
 
   @Override
