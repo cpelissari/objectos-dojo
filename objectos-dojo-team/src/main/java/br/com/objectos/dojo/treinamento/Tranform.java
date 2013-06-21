@@ -19,6 +19,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 /**
  * @author anderson.silva@objectos.com.br (Anderson Silva)
  * @author carolene.bertoldi@objectos.com.br (Carolene Bertoldi)
@@ -34,7 +36,7 @@ public class Tranform {
       list.add(res);
     }
 
-    return list;
+    return ImmutableList.copyOf(list);
   }
 
   public List<String> de(List<Integer> ints, IntegerToString integerToString) {
@@ -45,7 +47,7 @@ public class Tranform {
       list.add(res);
     }
 
-    return list;
+    return ImmutableList.copyOf(list);
   }
 
 }
