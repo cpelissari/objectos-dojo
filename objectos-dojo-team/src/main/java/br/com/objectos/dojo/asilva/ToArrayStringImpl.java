@@ -15,33 +15,15 @@
  */
 package br.com.objectos.dojo.asilva;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
-import java.util.List;
-
-import org.testng.annotations.Test;
-
-import com.google.common.collect.ImmutableList;
-
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
-@Test
-public class TesteDeArrayString {
+class ToArrayStringImpl implements ToArrayString {
 
-  private final ToArrayString toArray = new ToArrayStringImpl();
-
-  public void deve_converter_array_string() {
-    String linha = "Solange Gomes;Banco de dados;123456789";
-
-    String[] arr = toArray.de(linha);
-    List<String> res = ImmutableList.copyOf(arr);
-
-    assertThat(res.size(), equalTo(3));
-    assertThat(res.get(0), equalTo("Solange Gomes"));
-    assertThat(res.get(1), equalTo("Banco de dados"));
-    assertThat(res.get(2), equalTo("123456789"));
+  @Override
+  public String[] de(String linha) {
+    String[] res = linha.split(";");
+    return res;
   }
 
 }
