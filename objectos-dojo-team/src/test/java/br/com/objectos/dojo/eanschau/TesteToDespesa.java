@@ -9,6 +9,9 @@ package br.com.objectos.dojo.eanschau;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import org.testng.annotations.Test;
 
 import com.google.common.base.Function;
@@ -22,7 +25,8 @@ public class TesteToDespesa {
 
   private final ToDespesa desp = new ToDespesaImpl();
 
-  public void deve_gerar_despesa() {
+  public void deve_gerar_despesa() throws URISyntaxException, IOException {
+    DespesasFalso.popularTxt();
     String[] entrada = { "mercado xyz", "5.5", "05/07/2013", "VARIAVEL", "Mercado" };
 
     Despesa contra = DespesasFalso.DESPESA_VAR;
@@ -30,6 +34,7 @@ public class TesteToDespesa {
 
     Despesa pojo = desp.of(entrada);
     String res = new DespesaToString().apply(pojo);
+    System.out.println(res);
 
     assertThat(res, equalTo(prova));
   }

@@ -52,4 +52,10 @@ public class DespesaPojo implements Despesa {
     return categoria;
   }
 
+  @Override
+  public String toString() {
+    return String.format("%s;%.3f%n;%s,%s,%s", descricao, valor, data.toString(), tipo.name(),
+        categoria.getNome());
+  }
+
 }

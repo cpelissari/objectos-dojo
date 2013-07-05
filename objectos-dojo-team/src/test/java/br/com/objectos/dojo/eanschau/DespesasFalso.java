@@ -15,6 +15,9 @@
  */
 package br.com.objectos.dojo.eanschau;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.joda.time.LocalDate;
@@ -58,8 +61,13 @@ public class DespesasFalso {
       .add(DESPESA_VAR)
       .build();
 
-  public static List<Despesa> getTodos() {
+  public static List<Despesa> getTodos() throws URISyntaxException, IOException {
     return todos;
+  }
+
+  public static void popularTxt() throws URISyntaxException, IOException {
+    File file = TxtsFalso.getFile("/despesa/despesa_falso.txt");
+
   }
 
   private static ConstrutorDeDespesaFalso novo() {
