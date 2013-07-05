@@ -6,11 +6,15 @@
  */
 package br.com.objectos.dojo.eanschau;
 
+import static br.com.objectos.dojo.eanschau.PeriodicidadeTipo.VARIAVEL;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.joda.time.LocalDate;
 import org.testng.annotations.Test;
+
+import com.google.common.base.Function;
+import com.google.common.base.Objects;
 
 /**
  * @author edenir.anschau@objectos.com.br (Edenir Norberto Anschau)
@@ -23,13 +27,39 @@ public class TesteToDespesa {
   public void deve_gerar_despesa() {
     String[] entrada = { "mercado xyz", "5.5", "25/07/2013", "VARIAVEL", "Mercado" };
 
-    Despesa res = desp.of(entrada);
+    Despesa contra = despesa("mercado xyz", 5.5d, new LocalDate(2013, 7, 25), VARIAVEL, "Mercado");
+    String prova = new DespesaToString().apply(contra);
 
-    assertThat(res.getDescricao(), equalTo("mercado xyz"));
-    assertThat(res.getValor(), equalTo(5.5d));
-    assertThat(res.getData(), equalTo(new LocalDate(2013, 7, 25)));
-    assertThat(res.getTipo(), equalTo(PeriodicidadeTipo.VARIAVEL));
-    assertThat(res.getCategoria().getNome(), equalTo("Mercado"));
+    Despesa pojo = desp.of(entrada);
+    String res = new DespesaToString().apply(pojo);
+
+    assertThat(res, equalTo(prova));
+  }
+
+  private class DespesaToString implements Function<Despesa, String> {
+
+    @Override
+    public String apply(Despesa input) {
+      return Objects.toStringHelper(input)
+          .addValue(input.getDescricao())
+          .addValue(input.getValor())
+          .addValue(input.getData())
+          .addValue(input.getTipo())
+          .addValue(input.getCategoria().getNome())
+          .toString();
+    }
+
+  }
+
+  private Despesa despesa(String des, double valor, LocalDate data, PeriodicidadeTipo tipo,
+      String cat) {
+    return new ConstrutorDeDespesaFalso()
+        .descricao(des)
+        .valor(valor)
+        .data(data)
+        .tipo(tipo)
+        .categoria(new CategoriaPojo(cat))
+        .novaInstancia();
   }
 
 }
