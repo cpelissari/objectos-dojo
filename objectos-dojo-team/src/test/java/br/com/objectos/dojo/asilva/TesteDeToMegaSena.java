@@ -18,36 +18,25 @@ package br.com.objectos.dojo.asilva;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.List;
-
+import org.joda.time.LocalDate;
 import org.testng.annotations.Test;
-
-import com.google.common.collect.ImmutableList;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
 @Test
-public class TesteDeLerTxt {
+public class TesteDeToMegaSena {
 
-  private final LerTxt ler = new LerTxtImp();
+  private final ToMegaSena mega = new ToMegaSenaImpl();
 
-  public void deve_ler_txt() throws IOException, URISyntaxException {
-    File file = TxtsFalso.getFile("/Mega/ler.txt");
+  public void deve_gerar_mega_sena() {
+    String[] entrada = new String[] { "11", "05/07/2013", "01 02 03 04 05 06" };
 
-    String txt = ler.ler(file);
-    String sep = System.getProperty("line.separator");
-    String[] arr = txt.split(sep);
+    MegaSena res = mega.of(entrada);
 
-    List<String> res = ImmutableList.copyOf(arr);
-
-    assertThat(res.size(), equalTo(3));
-    assertThat(res.get(0), equalTo("ttt/// --ta-- ção;;"));
-    assertThat(res.get(1), equalTo("aee;;; --er- ;;;"));
-    assertThat(res.get(2), equalTo("qqq   ;;;e;; ---ww///"));
+    assertThat(res.getNumeroConcurso(), equalTo(11));
+    assertThat(res.getDataSorteio(), equalTo(new LocalDate(2013, 7, 11)));
+    assertThat(res.getResultado(), equalTo("01 02 03 04 05 06"));
   }
 
 }

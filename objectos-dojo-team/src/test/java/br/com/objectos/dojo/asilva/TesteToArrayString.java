@@ -18,9 +18,6 @@ package br.com.objectos.dojo.asilva;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import org.testng.annotations.Test;
@@ -31,23 +28,20 @@ import com.google.common.collect.ImmutableList;
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
 @Test
-public class TesteDeLerTxt {
+public class TesteToArrayString {
 
-  private final LerTxt ler = new LerTxtImp();
+  private final ToArrayString toArray = new ToArrayStringImpl();
 
-  public void deve_ler_txt() throws IOException, URISyntaxException {
-    File file = TxtsFalso.getFile("/Mega/ler.txt");
+  public void deve_converter_array_string() {
+    String linha = "11;01/01/1998;01 02 03 04 05 06";
 
-    String txt = ler.ler(file);
-    String sep = System.getProperty("line.separator");
-    String[] arr = txt.split(sep);
-
-    List<String> res = ImmutableList.copyOf(arr);
+    String[] linhas = toArray.of(linha);
+    List<String> res = ImmutableList.copyOf(linhas);
 
     assertThat(res.size(), equalTo(3));
-    assertThat(res.get(0), equalTo("ttt/// --ta-- ção;;"));
-    assertThat(res.get(1), equalTo("aee;;; --er- ;;;"));
-    assertThat(res.get(2), equalTo("qqq   ;;;e;; ---ww///"));
+    assertThat(res.get(0), equalTo("11"));
+    assertThat(res.get(1), equalTo("01/01/1998"));
+    assertThat(res.get(2), equalTo("01 02 03 04 05 06"));
   }
 
 }

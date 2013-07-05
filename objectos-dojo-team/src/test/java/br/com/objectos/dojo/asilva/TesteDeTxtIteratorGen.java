@@ -17,37 +17,41 @@ package br.com.objectos.dojo.asilva;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import org.testng.annotations.Test;
-
-import com.google.common.collect.ImmutableList;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
 @Test
-public class TesteDeLerTxt {
+public class TesteDeTxtIteratorGen {
 
-  private final LerTxt ler = new LerTxtImp();
+  private final TxtIteratorGen gen = new TxtIteratorGenImpl();
 
-  public void deve_ler_txt() throws IOException, URISyntaxException {
+  public void deve_iterar_um_txt() throws URISyntaxException, FileNotFoundException {
     File file = TxtsFalso.getFile("/Mega/ler.txt");
 
-    String txt = ler.ler(file);
-    String sep = System.getProperty("line.separator");
-    String[] arr = txt.split(sep);
+    TxtIterator res = gen.gerarDe(file);
 
-    List<String> res = ImmutableList.copyOf(arr);
-
-    assertThat(res.size(), equalTo(3));
-    assertThat(res.get(0), equalTo("ttt/// --ta-- ção;;"));
-    assertThat(res.get(1), equalTo("aee;;; --er- ;;;"));
-    assertThat(res.get(2), equalTo("qqq   ;;;e;; ---ww///"));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.next(), equalTo("ttt/// --ta-- ção;;"));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.next(), equalTo("aee;;; --er- ;;;"));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.hasNext(), is(true));
+    assertThat(res.next(), equalTo("qqq   ;;;e;; ---ww///"));
+    assertThat(res.hasNext(), is(false));
+    assertThat(res.hasNext(), is(false));
+    assertThat(res.hasNext(), is(false));
   }
 
 }
