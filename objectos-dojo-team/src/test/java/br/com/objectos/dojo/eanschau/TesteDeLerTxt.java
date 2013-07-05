@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.testng.annotations.Test;
@@ -25,9 +26,8 @@ public class TesteDeLerTxt {
 
   private final LerTxt lerTxt = new LerTxtImpl();
 
-  public void deve_ler_txt() throws IOException {
-    File file = new File(
-        "/home/eanschau/kdo/projetos/objectos-dojo/objectos-dojo-team/src/test/resources/despesa/despesa_test.txt");
+  public void deve_ler_txt() throws IOException, URISyntaxException {
+    File file = TxtsFalso.getFile("/despesa/despesa_test.txt");
 
     String txt = lerTxt.of(file);
 
