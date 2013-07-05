@@ -40,7 +40,7 @@ public class TesteDeLerTxt {
 
   public void deve_ler_txt() throws IOException, URISyntaxException {
 
-    URL url = Resources.getResource(LerTxt.class, "/Aluno/Ler.txt");
+    URL url = Resources.getResource(TxtsFalso.class, "/Aluno/Ler.txt");
     URI uri = url.toURI();
 
     File file = new File(uri);

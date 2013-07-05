@@ -15,28 +15,47 @@
  */
 package br.com.objectos.dojo.asilva;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
-import org.testng.annotations.Test;
-
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
-@Test
-public class TesteDeToAluno {
+public class ToAlunoImpl implements ToAluno {
 
-  private final ToAluno aluno = new ToAlunoImpl();
+  @Override
+  public Aluno of(String[] entrada) {
+    return new Construtor(entrada).novaInstancia();
+  }
 
-  public void deve_gerar_aluno() {
+  private class Construtor implements Aluno.Construtor {
 
-    String[] entrada = new String[] { "Solange Gomes", "Banco de dados", "123456789" };
+    private final String[] linhas;
 
-    Aluno res = aluno.of(entrada);
+    public Construtor(String[] linhas) {
+      this.linhas = linhas;
+    }
 
-    assertThat(res.getNome(), equalTo("123456789"));
-    assertThat(res.getNomeMateria(), equalTo("Solange Gomes"));
-    assertThat(res.getRa(), equalTo("Banco de dados"));
+    @Override
+    public Aluno novaInstancia() {
+      return new AlunoPojo(this);
+    }
+
+    @Override
+    public String getNome() {
+      String nome = linhas[2];
+      return nome;
+    }
+
+    @Override
+    public String getNomeMateria() {
+      String nomeMateria = linhas[0];
+      return nomeMateria;
+    }
+
+    @Override
+    public String getRa() {
+      String ra = linhas[1];
+      return ra;
+    }
+
   }
 
 }

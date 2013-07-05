@@ -15,28 +15,26 @@
  */
 package br.com.objectos.dojo.asilva;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
-import org.testng.annotations.Test;
+import com.google.common.io.Resources;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
-@Test
-public class TesteDeToAluno {
+public class TxtsFalso {
 
-  private final ToAluno aluno = new ToAlunoImpl();
+  public static File getFile(String urlFile) throws URISyntaxException {
 
-  public void deve_gerar_aluno() {
+    URL url = Resources.getResource(LerTxt.class, urlFile);
+    URI uri = url.toURI();
 
-    String[] entrada = new String[] { "Solange Gomes", "Banco de dados", "123456789" };
+    File file = new File(uri);
 
-    Aluno res = aluno.of(entrada);
-
-    assertThat(res.getNome(), equalTo("123456789"));
-    assertThat(res.getNomeMateria(), equalTo("Solange Gomes"));
-    assertThat(res.getRa(), equalTo("Banco de dados"));
+    return file;
   }
 
 }
