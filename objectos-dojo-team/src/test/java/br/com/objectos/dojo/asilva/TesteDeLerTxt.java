@@ -20,15 +20,12 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.io.Resources;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
@@ -40,10 +37,7 @@ public class TesteDeLerTxt {
 
   public void deve_ler_txt() throws IOException, URISyntaxException {
 
-    URL url = Resources.getResource(TxtsFalso.class, "/Aluno/Ler.txt");
-    URI uri = url.toURI();
-
-    File file = new File(uri);
+    File file = TxtsFalso.getFile("/Aluno/Ler.txt");
 
     String txt = ler.ler(file);
     String separador = System.getProperty("line.separator");
