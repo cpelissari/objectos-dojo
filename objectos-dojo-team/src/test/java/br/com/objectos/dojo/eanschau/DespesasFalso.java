@@ -80,9 +80,13 @@ public class DespesasFalso {
     List<String> linhas = newArrayList();
     String res;
     for (Despesa desp : todos) {
-      res = joiner.join(desp.getDescricao(), desp.getValor(),
-          desp.getData().toString("dd/MM/yyyy"), desp.getTipo(), desp.getCategoria());
+      String descricao = desp.getDescricao();
+      double val = desp.getValor();
+      String data = desp.getData().toString("dd/MM/yyyy");
+      PeriodicidadeTipo tipo = desp.getTipo();
+      Categoria categoria = desp.getCategoria();
 
+      res = joiner.join(descricao, val, data, tipo, categoria);
       linhas.add(res);
     }
 
