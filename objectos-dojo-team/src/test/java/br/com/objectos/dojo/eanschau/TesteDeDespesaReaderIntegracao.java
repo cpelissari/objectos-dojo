@@ -15,15 +15,16 @@
  */
 package br.com.objectos.dojo.eanschau;
 
+import static com.google.common.collect.Lists.transform;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
 import java.util.List;
 
-import org.joda.time.LocalDate;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -40,41 +41,26 @@ public class TesteDeDespesaReaderIntegracao {
   private DespesaReader reader;
 
   @BeforeClass
-  public void prepararReader() {
+  public void prepararReader() throws IOException, URISyntaxException {
     ModuloDeTesteDespesa moduloDeTesteDespesa = new ModuloDeTesteDespesa();
     Injector injector = Guice.createInjector(moduloDeTesteDespesa);
     reader = injector.getInstance(DespesaReader.class);
+    DespesasFalso.polularTxt();
   }
 
-  public void deve_gerar_interator_despesa() throws URISyntaxException {
-    File file = TxtsFalso.getFile("/despesa/despesa_falso.txt");
+  public void deve_gerar_interator_despesa() throws URISyntaxException, IOException {
+    File file = TxtsFalso.getFile("/despesa/despesasFalso.txt");
+
+    List<Despesa> contra = DespesasFalso.getTodos();
+    List<String> prova = transform(contra, new DespesaToString());
 
     Iterator<Despesa> iter = reader.of(file);
 
-    List<Despesa> res = ImmutableList.copyOf(iter);
+    List<Despesa> list = ImmutableList.copyOf(iter);
+    List<String> res = transform(list, new DespesaToString());
 
     assertThat(res.size(), equalTo(3));
-
-    Despesa r0 = res.get(0);
-    assertThat(r0.getDescricao(), equalTo("mercado xyz"));
-    assertThat(r0.getValor(), equalTo(5.5));
-    assertThat(r0.getData(), equalTo(new LocalDate(2013, 7, 5)));
-    assertThat(r0.getTipo(), equalTo(PeriodicidadeTipo.VARIAVEL));
-    assertThat(r0.getCategoria().getNome(), equalTo("Mercado"));
-
-    Despesa r01 = res.get(1);
-    assertThat(r01.getDescricao(), equalTo("despesa xyz"));
-    assertThat(r01.getValor(), equalTo(15.5));
-    assertThat(r01.getData(), equalTo(new LocalDate(2013, 4, 15)));
-    assertThat(r01.getTipo(), equalTo(PeriodicidadeTipo.FIXA));
-    assertThat(r01.getCategoria().getNome(), equalTo("Outros"));
-
-    Despesa r02 = res.get(2);
-    assertThat(r02.getDescricao(), equalTo("aluguel Junho/2013"));
-    assertThat(r02.getValor(), equalTo(800.0));
-    assertThat(r02.getData(), equalTo(new LocalDate(2013, 6, 5)));
-    assertThat(r02.getTipo(), equalTo(PeriodicidadeTipo.FIXA));
-    assertThat(r02.getCategoria().getNome(), equalTo("Habitação"));
+    assertThat(res, equalTo(prova));
   }
 
 }

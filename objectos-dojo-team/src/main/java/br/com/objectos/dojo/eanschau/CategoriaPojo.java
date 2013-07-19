@@ -22,4 +22,9 @@ public class CategoriaPojo implements Categoria {
     return nome;
   }
 
+  @Override
+  public String toString() {
+    return nome;
+  }
+
 }

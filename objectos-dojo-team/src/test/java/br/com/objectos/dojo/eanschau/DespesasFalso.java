@@ -15,13 +15,19 @@
  */
 package br.com.objectos.dojo.eanschau;
 
+import static com.google.common.collect.Lists.newArrayList;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
 import org.joda.time.LocalDate;
 
+import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.Files;
 
 /**
  * @author edenir.anschau@objectos.com.br (Edenir Norberto Anschau)
@@ -62,6 +68,25 @@ public class DespesasFalso {
 
   public static List<Despesa> getTodos() throws URISyntaxException, IOException {
     return todos;
+  }
+
+  public static void polularTxt() throws IOException, URISyntaxException {
+    // consertar isso.
+    File file = new File(
+        "/home/eanschau/kdo/projetos/objectos-dojo/objectos-dojo-team/src/test/resources/despesa/despesasFalso.txt");
+
+    Joiner joiner = Joiner.on(";").skipNulls();
+
+    List<String> linhas = newArrayList();
+    String res;
+    for (Despesa desp : todos) {
+      res = joiner.join(desp.getDescricao(), desp.getValor(),
+          desp.getData().toString("dd/MM/yyyy"), desp.getTipo(), desp.getCategoria());
+
+      linhas.add(res);
+    }
+
+    Files.write(Joiner.on("\n").join(linhas), file, Charsets.UTF_8);
   }
 
   private static ConstrutorDeDespesaFalso novo() {

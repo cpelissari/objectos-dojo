@@ -14,9 +14,6 @@ import java.net.URISyntaxException;
 
 import org.testng.annotations.Test;
 
-import com.google.common.base.Function;
-import com.google.common.base.Objects;
-
 /**
  * @author edenir.anschau@objectos.com.br (Edenir Norberto Anschau)
  */
@@ -35,21 +32,6 @@ public class TesteToDespesa {
     String res = new DespesaToString().apply(pojo);
 
     assertThat(res, equalTo(prova));
-  }
-
-  private class DespesaToString implements Function<Despesa, String> {
-
-    @Override
-    public String apply(Despesa input) {
-      return Objects.toStringHelper(input)
-          .addValue(input.getDescricao())
-          .addValue(input.getValor())
-          .addValue(input.getData())
-          .addValue(input.getTipo())
-          .addValue(input.getCategoria().getNome())
-          .toString();
-    }
-
   }
 
 }

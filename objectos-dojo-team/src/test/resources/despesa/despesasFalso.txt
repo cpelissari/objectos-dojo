@@ -1,0 +1,3 @@
+mercado xyz;5.5;05/07/2013;VARIAVEL;Mercado
+aluguel xyz;500.5;20/07/2013;FIXA;Habitação
+mercado xyz;5.5;05/07/2013;VARIAVEL;Mercado
