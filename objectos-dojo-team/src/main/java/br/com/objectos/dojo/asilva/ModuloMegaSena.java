@@ -15,17 +15,18 @@
  */
 package br.com.objectos.dojo.asilva;
 
-import java.io.File;
-import java.util.Iterator;
-
-import com.google.inject.ImplementedBy;
+import com.google.inject.AbstractModule;
 
 /**
- * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
+ * @author edenir.anschau@objectos.com.br (Edenir Norberto Anschau)
  */
-@ImplementedBy(MegaSenaReaderImpl.class)
-public interface MegaSenaReader {
+public class ModuloMegaSena extends AbstractModule {
 
-  Iterator<MegaSena> of(File file);
+  @Override
+  protected void configure() {
+    bind(TxtIteratorGen.class).to(TxtIteratorGenImpl.class);
+    bind(ToArrayString.class).to(ToArrayStringImpl.class);
+    bind(ToMegaSena.class).to(ToMegaSenaImpl.class);
+  }
 
 }
