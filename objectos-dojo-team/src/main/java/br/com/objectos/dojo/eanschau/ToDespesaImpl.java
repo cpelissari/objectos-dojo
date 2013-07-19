@@ -15,9 +15,14 @@
  */
 package br.com.objectos.dojo.eanschau;
 
+import java.util.Iterator;
+
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterators;
 
 /**
  * @author edenir.anschau@objectos.com.br (Edenir Norberto Anschau)
@@ -27,6 +32,18 @@ class ToDespesaImpl implements ToDespesa {
   @Override
   public Despesa of(String[] entrada) {
     return new Construtor(entrada).novaInstancia();
+  }
+
+  @Override
+  public Iterator<Despesa> transform(Iterator<String[]> colunas) {
+    return Iterators.transform(colunas, new ToImpl());
+  }
+
+  private class ToImpl implements Function<String[], Despesa> {
+    @Override
+    public Despesa apply(String[] input) {
+      return of(input);
+    }
   }
 
   private class Construtor implements Despesa.Construtor {

@@ -15,7 +15,6 @@
  */
 package br.com.objectos.dojo.eanschau;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -63,11 +62,6 @@ public class DespesasFalso {
 
   public static List<Despesa> getTodos() throws URISyntaxException, IOException {
     return todos;
-  }
-
-  public static void popularTxt() throws URISyntaxException, IOException {
-    File file = TxtsFalso.getFile("/despesa/despesa_falso.txt");
-
   }
 
   private static ConstrutorDeDespesaFalso novo() {

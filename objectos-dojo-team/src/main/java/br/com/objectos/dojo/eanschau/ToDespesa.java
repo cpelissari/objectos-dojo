@@ -6,11 +6,15 @@
  */
 package br.com.objectos.dojo.eanschau;
 
+import java.util.Iterator;
+
 /**
  * @author edenir.anschau@objectos.com.br (Edenir Norberto Anschau)
  */
 public interface ToDespesa {
 
   Despesa of(String[] entrada);
+
+  Iterator<Despesa> transform(Iterator<String[]> colunas);
 
 }
