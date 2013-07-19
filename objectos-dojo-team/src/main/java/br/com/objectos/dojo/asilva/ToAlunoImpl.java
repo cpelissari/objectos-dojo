@@ -15,6 +15,11 @@
  */
 package br.com.objectos.dojo.asilva;
 
+import java.util.Iterator;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterators;
+
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
@@ -23,6 +28,18 @@ public class ToAlunoImpl implements ToAluno {
   @Override
   public Aluno of(String[] entrada) {
     return new Construtor(entrada).novaInstancia();
+  }
+
+  @Override
+  public Iterator<Aluno> transform(Iterator<String[]> colunas) {
+    return Iterators.transform(colunas, new ToImpl());
+  }
+
+  private class ToImpl implements Function<String[], Aluno> {
+    @Override
+    public Aluno apply(String[] input) {
+      return of(input);
+    }
   }
 
   private class Construtor implements Aluno.Construtor {
@@ -40,22 +57,21 @@ public class ToAlunoImpl implements ToAluno {
 
     @Override
     public String getNome() {
-      String nome = linhas[2];
+      String nome = linhas[0];
       return nome;
     }
 
     @Override
     public String getNomeMateria() {
-      String nomeMateria = linhas[0];
+      String nomeMateria = linhas[1];
       return nomeMateria;
     }
 
     @Override
     public String getRa() {
-      String ra = linhas[1];
+      String ra = linhas[2];
       return ra;
     }
-
   }
 
 }

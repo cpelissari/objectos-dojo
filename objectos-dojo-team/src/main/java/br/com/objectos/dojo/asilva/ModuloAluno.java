@@ -15,15 +15,18 @@
  */
 package br.com.objectos.dojo.asilva;
 
-import java.util.Iterator;
+import com.google.inject.AbstractModule;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
-public interface ToAluno {
+public class ModuloAluno extends AbstractModule {
 
-  Aluno of(String[] entrada);
-
-  Iterator<Aluno> transform(Iterator<String[]> colunas);
+  @Override
+  protected void configure() {
+    bind(TxtIteratorGen.class).to(TxtIteratorGenImpl.class);
+    bind(ToArrayString.class).to(ToArrayStringImpl.class);
+    bind(ToAluno.class).to(ToAlunoImpl.class);
+  }
 
 }

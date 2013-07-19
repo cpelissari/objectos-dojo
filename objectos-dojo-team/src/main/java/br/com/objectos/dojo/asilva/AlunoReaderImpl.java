@@ -15,15 +15,37 @@
  */
 package br.com.objectos.dojo.asilva;
 
+import java.io.File;
 import java.util.Iterator;
+
+import com.google.inject.Inject;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
-public interface ToAluno {
+public class AlunoReaderImpl implements AlunoReader {
 
-  Aluno of(String[] entrada);
+  private final TxtIteratorGen txtIteratorGen;
+  private final ToArrayString toArrayString;
+  private final ToAluno toAluno;
 
-  Iterator<Aluno> transform(Iterator<String[]> colunas);
+  @Inject
+  public AlunoReaderImpl(TxtIteratorGen txtIteratorGen,
+                         ToArrayString toArrayString,
+                         ToAluno toAluno) {
+    this.txtIteratorGen = txtIteratorGen;
+    this.toArrayString = toArrayString;
+    this.toAluno = toAluno;
+  }
+
+  @Override
+  public Iterator<Aluno> of(File file) {
+
+    Iterator<String> linhas = txtIteratorGen.gerar(file);
+
+    Iterator<String[]> colunas = toArrayString.transform(linhas);
+
+    return toAluno.transform(colunas);
+  }
 
 }

@@ -15,15 +15,17 @@
  */
 package br.com.objectos.dojo.asilva;
 
+import java.io.File;
 import java.util.Iterator;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
-public interface ToAluno {
+@ImplementedBy(AlunoReaderImpl.class)
+public interface AlunoReader {
 
-  Aluno of(String[] entrada);
-
-  Iterator<Aluno> transform(Iterator<String[]> colunas);
+  Iterator<Aluno> of(File file);
 
 }
