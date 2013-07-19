@@ -42,7 +42,7 @@ public class TesteDeMegaReaderUnitario {
   private Asserts asserts;
 
   @BeforeClass
-  public void preparReader() {
+  public void prepararReader() {
     TxtIteratorGen txtIteratorGen = new TxtIteratorGenFalso();
     ToArrayString toArrayString = new ToArrayStringFalso();
     ToMegaSena toMegaSena = new ToMegaSenaFalso();

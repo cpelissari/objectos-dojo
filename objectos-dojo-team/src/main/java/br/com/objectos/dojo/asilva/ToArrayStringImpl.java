@@ -37,12 +37,10 @@ class ToArrayStringImpl implements ToArrayString {
   }
 
   private class ToImpl implements Function<String, String[]> {
-
     @Override
     public String[] apply(String input) {
       return of(input);
     }
-
   }
 
 }

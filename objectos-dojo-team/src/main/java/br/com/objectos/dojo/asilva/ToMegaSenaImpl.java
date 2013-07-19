@@ -40,12 +40,10 @@ class ToMegaSenaImpl implements ToMegaSena {
   }
 
   private class ToImpl implements Function<String[], MegaSena> {
-
     @Override
     public MegaSena apply(String[] input) {
       return of(input);
     }
-
   }
 
   private class Construtor implements MegaSena.Construtor {

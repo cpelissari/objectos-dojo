@@ -22,6 +22,8 @@ import java.util.Iterator;
  */
 public interface ToMegaSena {
 
+  Iterator<MegaSena> transform(Iterator<String[]> colunas);
+
   MegaSena of(String[] entrada);
 
   Iterator<MegaSena> transform(Iterator<String[]> colunas);

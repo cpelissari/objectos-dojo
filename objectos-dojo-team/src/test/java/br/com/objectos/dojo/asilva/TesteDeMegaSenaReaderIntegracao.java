@@ -40,9 +40,9 @@ public class TesteDeMegaSenaReaderIntegracao {
   private MegaSenaReader reader;
 
   @BeforeClass
-  public void preparReader() {
-    ModuloMegaSena moduloMegaSena = new ModuloMegaSena();
-    Injector injector = Guice.createInjector(moduloMegaSena);
+  public void prepararReader() {
+    ModuloMegaSena modulo = new ModuloMegaSena();
+    Injector injector = Guice.createInjector(modulo);
     reader = injector.getInstance(MegaSenaReader.class);
   }
 
