@@ -16,13 +16,12 @@
 package br.com.objectos.dojo.asilva;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
 public interface TxtIteratorGen {
 
-  TxtIterator gerarDe(File file) throws FileNotFoundException;
+  TxtIterator gerarDe(File file);
 
 }

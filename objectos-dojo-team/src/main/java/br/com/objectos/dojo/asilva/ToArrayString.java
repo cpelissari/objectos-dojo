@@ -15,11 +15,15 @@
  */
 package br.com.objectos.dojo.asilva;
 
+import java.util.Iterator;
+
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
 public interface ToArrayString {
 
-  String[] of(String linha);
+  String[] of(String linhas);
+
+  Iterator<String[]> transform(Iterator<String> linhas);
 
 }

@@ -24,17 +24,27 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.joda.time.LocalDate;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
 @Test
-public class TesteDeMegaSenaReader {
+public class TesteDeMegaSenaReaderIntegracao {
 
   private MegaSenaReader reader;
+
+  @BeforeClass
+  public void preparReader() {
+    ModuloMegaSena moduloMegaSena = new ModuloMegaSena();
+    Injector injector = Guice.createInjector(moduloMegaSena);
+    reader = injector.getInstance(MegaSenaReader.class);
+  }
 
   public void deve_gerar_iterator_mega_sena() throws URISyntaxException {
     File file = TxtsFalso.getFile("/Mega/resultado.txt");
@@ -55,7 +65,7 @@ public class TesteDeMegaSenaReader {
     assertThat(r1.getResultado(), equalTo("11 22 53 14 45 55"));
 
     MegaSena r2 = res.get(2);
-    assertThat(r2.getNumeroConcurso(), equalTo(13));
+    assertThat(r2.getNumeroConcurso(), equalTo(100));
     assertThat(r2.getDataSorteio(), equalTo(new LocalDate(2016, 6, 5)));
     assertThat(r2.getResultado(), equalTo("18 31 55 21 52 05"));
   }

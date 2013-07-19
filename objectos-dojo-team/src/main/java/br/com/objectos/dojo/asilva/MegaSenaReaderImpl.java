@@ -15,34 +15,38 @@
  */
 package br.com.objectos.dojo.asilva;
 
+import java.io.File;
 import java.util.Iterator;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterators;
+import com.google.inject.Inject;
 
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
-class ToArrayStringImpl implements ToArrayString {
+class MegaSenaReaderImpl implements MegaSenaReader {
 
-  @Override
-  public String[] of(String linha) {
-    String[] res = linha.split(";");
-    return res;
+  private final TxtIteratorGen txtIteratorGen;
+
+  private final ToArrayString toArrayString;
+
+  private final ToMegaSena toMegaSena;
+
+  @Inject
+  public MegaSenaReaderImpl(TxtIteratorGen txtIteratorGen,
+                            ToArrayString toArrayString,
+                            ToMegaSena toMegaSena) {
+    this.txtIteratorGen = txtIteratorGen;
+    this.toArrayString = toArrayString;
+    this.toMegaSena = toMegaSena;
   }
 
   @Override
-  public Iterator<String[]> transform(Iterator<String> linhas) {
-    return Iterators.transform(linhas, new ToImpl());
-  }
+  public Iterator<MegaSena> of(File file) {
+    Iterator<String> linhas = txtIteratorGen.gerarDe(file);
 
-  private class ToImpl implements Function<String, String[]> {
+    Iterator<String[]> colunas = toArrayString.transform(linhas);
 
-    @Override
-    public String[] apply(String input) {
-      return of(input);
-    }
-
+    return toMegaSena.transform(colunas);
   }
 
 }

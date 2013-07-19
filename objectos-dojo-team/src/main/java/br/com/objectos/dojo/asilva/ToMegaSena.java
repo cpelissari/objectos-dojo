@@ -15,11 +15,15 @@
  */
 package br.com.objectos.dojo.asilva;
 
+import java.util.Iterator;
+
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
 public interface ToMegaSena {
 
   MegaSena of(String[] entrada);
+
+  Iterator<MegaSena> transform(Iterator<String[]> colunas);
 
 }

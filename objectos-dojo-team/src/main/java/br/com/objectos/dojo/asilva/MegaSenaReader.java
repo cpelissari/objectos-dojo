@@ -18,9 +18,12 @@ package br.com.objectos.dojo.asilva;
 import java.io.File;
 import java.util.Iterator;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author anderson.silva@objectos.com.br (Anderson Amorim Silva)
  */
+@ImplementedBy(MegaSenaReaderImpl.class)
 public interface MegaSenaReader {
 
   Iterator<MegaSena> of(File file);
