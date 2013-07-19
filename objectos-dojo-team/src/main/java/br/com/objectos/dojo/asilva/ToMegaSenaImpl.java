@@ -58,7 +58,7 @@ class ToMegaSenaImpl implements ToMegaSena {
 
     @Override
     public String getResultado() {
-      return null;
+      return linhas[2];
     }
 
   }
