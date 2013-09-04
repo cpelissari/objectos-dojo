@@ -1,2 +1,3 @@
 Isso deve conflitar com a primeira linha do txt que está na branch
 cpelissari_05 - branch cpelissari_06
+Isso deve causar um conflito - branch cpelissari_05
