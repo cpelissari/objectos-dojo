@@ -7,7 +7,6 @@ date: "2013-09-09"
 published: true
 partof: procedimento-crud-web
 num: 9
-outof: 9
 ---
 
 ##Introdução
