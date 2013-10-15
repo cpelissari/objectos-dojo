@@ -11,7 +11,9 @@ outof: 10
 ---
 
 ##Introdução
+Para que as informações de nosso projeto web possam ser armazenadas, transmitidas ou exibidas é necessário realizar a serialização dos objetos.
 
+Neste artigo criaremos uma classe para serializar a entidade `Funcionario`.
 
 ## Antes de iniciar
 
